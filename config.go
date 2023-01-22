@@ -9,7 +9,6 @@ type Config struct {
 	appUrl     string
 	configFile string
 	disks      []string
-	smartctl   string
 }
 
 func (config *Config) init() error {
@@ -20,7 +19,6 @@ func (config *Config) init() error {
 	}
 	config.appKey = viper.GetString("agent.key")
 	config.appUrl = viper.GetString("agent.url")
-	config.smartctl = viper.GetString("tools.smartctl")
 	config.disks = viper.GetStringSlice("dev.disks")
 	return nil
 }

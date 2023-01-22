@@ -4,5 +4,3 @@ dev:
   disks:
     - /dev/disk0
     - /dev/disk1
-tools:
-  smartctl: /usr/local/bin/smartctl
