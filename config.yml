@@ -1,0 +1,8 @@
+agent:
+  key: your_key_goes_here
+dev:
+  disks:
+    - /dev/disk0
+    - /dev/disk1
+tools:
+  smartctl: /usr/local/bin/smartctl

@@ -5,8 +5,11 @@ import (
 )
 
 type Config struct {
-	configFile string
 	appKey     string
+	appUrl     string
+	configFile string
+	disks      []string
+	smartctl   string
 }
 
 func (config *Config) init() error {
@@ -15,6 +18,10 @@ func (config *Config) init() error {
 	if err != nil {
 		return &errorString{"config: Got an error when trying to read config file - " + err.Error()}
 	}
+	config.appKey = viper.GetString("agent.key")
+	config.appUrl = viper.GetString("agent.url")
+	config.smartctl = viper.GetString("tools.smartctl")
+	config.disks = viper.GetStringSlice("dev.disks")
 	return nil
 }
 
