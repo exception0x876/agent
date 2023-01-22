@@ -16,11 +16,19 @@ type SmartInfo struct {
 
 func monitorSmart(config *Config) {
 	defer wg.Done()
-	cmd, err := exec.Command("smartctl", "--json", "-a", "/dev/disk0").Output()
+	path, err := exec.LookPath(config.smartctl)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
-	fmt.Printf("%s", cmd)
+	cmd, err := exec.Command(path, "--json", "-a", "/dev/disk0").Output()
+	if err != nil {
+		if exitError, ok := err.(*exec.ExitError); ok {
+			exitCode := exitError.ExitCode()
+			//just print the exit code for now
+			fmt.Println(exitCode)
+		}
+	}
 	var parsed SmartInfo
 	err = json.Unmarshal(cmd, &parsed)
 	if err != nil {

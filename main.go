@@ -15,6 +15,7 @@ func main() {
 	config, err := NewConfig(configFilePath)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 	wg.Add(1)
 	go monitorSmart(config)
